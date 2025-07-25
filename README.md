@@ -1,4 +1,4 @@
-# Build Docker image and push it to nexus and docker hub using jenkins (using freestyle service)
+# Build Docker image and push it to nexus and docker hub using jenkins (using freestyle  Project)
 
 So In the repo we are going to see how to build the application and pushed it to their respective repository managemnt using jenkins
 as we know jenkins is used to automate the build of docker image, pushing of docker image and deploying of the docker image on the server Now we will see how to build and push the docker image using a **freestyle** service in jenkins.
@@ -8,9 +8,9 @@ The demo project we are going to use to build and push to their respective repos
 
 ## Building Docker image and pushing it to docker hub
 
-1. Click on a new job in the side bar of jenkins DashBoard (I assume you already installed jenkins on server [if not](https://github.com/Hemanth42d/install-jenkins-on-server.git)
-2. Give it a name and select freestyle job service and save it.
-3. Will be redirected to the job page you just created and select Configure in the side bar
+1. Click on a new item in the side bar of jenkins DashBoard (I assume you already installed jenkins on server [if not](https://github.com/Hemanth42d/install-jenkins-on-server.git)
+2. Give it a name and select freestyle Project service and save it.
+3. Will be redirected to the freestyle Project page you just created and select Configure in the side bar
 > Now click on git under source Code Managemant and provide required info like url, credentials, branch.
 > One thing to remember is to push inside a docker hub we need to login to the docker hub without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
 > Click on execute shell under the build steps
@@ -26,10 +26,10 @@ The demo project we are going to use to build and push to their respective repos
 
 ## Building Docker image and pushing it to nexus
 
-1. Click on a new job in the side bar of jenkins DashBoard (I assume you already installed jenkins on server [if not](https://github.com/Hemanth42d/install-jenkins-on-server.git)
+1. Click on a new item in the side bar of jenkins DashBoard (I assume you already installed jenkins on server [if not](https://github.com/Hemanth42d/install-jenkins-on-server.git)
 2. I assue you also have installed nexus on your server [if not](https://github.com/Hemanth42d/nexus-download-on-server.git)
-3. Give it a name and select freestyle job service and save it.
-4. Will be redirected to the job page you just created and select Configure in the side bar
+3. Give it a name and select freestyle Project service and save it.
+4. Will be redirected to the freestyle Project page you just created and select Configure in the side bar
 > Now click on git under source Code Managemant and provide required info like url, credentials, branch.
 > One thing to remember is to push inside a nexus  we need to login to the nexus without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
 > And also need to say docker that the ip address we are providing is ours so it can allow the insecure registrie by creating a file and configure it like
