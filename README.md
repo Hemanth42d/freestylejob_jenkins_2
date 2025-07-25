@@ -35,10 +35,12 @@ The demo project we are going to use to build and push to their respective repos
 > And also need to say docker that the ip address we are providing is ours so it can allow the insecure registrie by creating a file and configure it like
 > Also create a repo in nexus of docker(self hosted) and configur it by allowing http protocol and use a port 8080 for communication
 >```bash
->vim /var/run/deamon.json
-># { "insecure-registrie":["<ip_address":8083]
+>vim /var/run/daemon.json
+># { "nsecure-registries":["<ip_address":8083]
+>systemctl daemon-reexec
+>systemctl restart docker
 ># check if you can access it
->http://<ip_address>:8083/v2/ # it should respond like {"errors":[{"code":"UNAUTHORIZED","message":"access to the requested resource is not authorized","detail":null}]} it means we are not loged in
+>curl http://<ip_address>:8083/v2/ # it should respond like {"errors":[{"code":"UNAUTHORIZED","message":"access to the requested resource is not authorized","detail":null}]} it means we are not loged in
 >docker login <ip_address>:8083 # then it will asks for the username and password and it should shows Login Succed!
 >```
 >Then go for the below step 
