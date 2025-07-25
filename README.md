@@ -11,14 +11,14 @@ The demo project we are going to use to build and push to their respective repos
 1. Click on a new job in the side bar of jenkins DashBoard (I assume you already installed jenkins on server [if not](https://github.com/Hemanth42d/install-jenkins-on-server.git)
 2. Give it a name and select freestyle job service and save it.
 3. Will be redirected to the job page you just created and select Configure in the side bar
-  > Now click on git under source Code Managemant and provide required info like url, credentials, branch.
-  > One thing to remember is to push inside a docker hub we need to login to the docker hub without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
-  > Click on execute shell under the build steps
-  > ```bash
-  > docker build -t <username_docker-hub>/java-maven-app:1.0 .
-  > echo $PASSWORD | docker login -u $USERNAME --password-stdin 
-  > docker push <username_docker-hub>/java-maven-app:1.0
-  > ```
+> Now click on git under source Code Managemant and provide required info like url, credentials, branch.
+> One thing to remember is to push inside a docker hub we need to login to the docker hub without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
+> Click on execute shell under the build steps
+> ```bash
+> docker build -t <username_docker-hub>/java-maven-app:1.0 .
+> echo $PASSWORD | docker login -u $USERNAME --password-stdin 
+> docker push <username_docker-hub>/java-maven-app:1.0
+> ```
 4. click on save and then you will go to page with the sidebar option Build Now click on it
 5. After few seconds you will get a success message saying Build Success if not Build Failure you can check the console logs by clicking on the build number and then on console logs and check what went wrong.
 
@@ -30,24 +30,24 @@ The demo project we are going to use to build and push to their respective repos
 2. I assue you also have installed nexus on your server [if not](https://github.com/Hemanth42d/nexus-download-on-server.git)
 3. Give it a name and select freestyle job service and save it.
 4. Will be redirected to the job page you just created and select Configure in the side bar
-  > Now click on git under source Code Managemant and provide required info like url, credentials, branch.
-  > One thing to remember is to push inside a nexus  we need to login to the nexus without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
-  > And also need to say docker that the ip address we are providing is ours so it can allow the insecure registrie by creating a file and configure it like
-  > Also create a repo in nexus of docker(self hosted) and configur it by allowing http protocol and use a port 8080 for communication
-  >```bash
-  >vim /var/run/deamon.json
-  > # { "insecure-registrie":["<ip_address":8083]
-  ># check if you can access it
-  > http://<ip_address>:8083/v2/ # it should respond like {"errors":[{"code":"UNAUTHORIZED","message":"access to the requested resource is not authorized","detail":null}]} it means we are not loged in
-  >docker login <ip_address>:8083 # then it will asks for the username and password and it should shows Login Succed!
-  >```
-  > Then go for the below step 
-  > Click on execute shell under the build steps
-  > ```bash
-  > docker build -t <ip_address>:8083/java-maven-app:1.0 .
-  > echo $PASSWORD | docker login -u $USERNAME --password-stdin <ip_address>:8083
-  > docker push <ip_address>:8083/java-maven-app:1.0
-  > ```
+> Now click on git under source Code Managemant and provide required info like url, credentials, branch.
+> One thing to remember is to push inside a nexus  we need to login to the nexus without login we can't push and providing the credentials in shell script is a bad practice so set credentials in credientials tab or click on add credentials in the down of the selection of credential dropdown, Give **USERNAME PASSWORD** as variables
+> And also need to say docker that the ip address we are providing is ours so it can allow the insecure registrie by creating a file and configure it like
+> Also create a repo in nexus of docker(self hosted) and configur it by allowing http protocol and use a port 8080 for communication
+>```bash
+>vim /var/run/deamon.json
+># { "insecure-registrie":["<ip_address":8083]
+># check if you can access it
+>http://<ip_address>:8083/v2/ # it should respond like {"errors":[{"code":"UNAUTHORIZED","message":"access to the requested resource is not authorized","detail":null}]} it means we are not loged in
+>docker login <ip_address>:8083 # then it will asks for the username and password and it should shows Login Succed!
+>```
+>Then go for the below step 
+>Click on execute shell under the build steps
+>```bash
+>docker build -t <ip_address>:8083/java-maven-app:1.0 .
+>echo $PASSWORD | docker login -u $USERNAME --password-stdin <ip_address>:8083
+>docker push <ip_address>:8083/java-maven-app:1.0
+>```
 4. click on save and then you will go to page with the sidebar option Build Now, click on it
 5. After few seconds you will get a success message saying Build Success if not Build Failure you can check the console logs by clicking on the build number and then on console logs and check what went wrong.
 
